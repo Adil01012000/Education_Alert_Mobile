@@ -18,7 +18,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.white, child: FlutterLogo());
+    return Container(
+      color: Color(0xFF12283C),
+      child: Image.asset(
+        'assets/images/logo.png',
+      ),
+    );
   }
 }
 
