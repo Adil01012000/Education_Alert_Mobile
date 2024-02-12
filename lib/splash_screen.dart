@@ -1,4 +1,9 @@
 import 'dart:async';
+import 'package:edualert/create_school.dart';
+import 'package:edualert/forgot_password.dart';
+import 'package:edualert/join_school.dart';
+import 'package:edualert/login.dart';
+import 'package:edualert/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SecondScreen())));
+            context, MaterialPageRoute(builder: (context) => JoinSchool())));
   }
 
   @override
