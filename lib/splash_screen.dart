@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:edualert/alerts.dart';
+import 'package:edualert/alerts_attentat.dart';
+import 'package:edualert/alerts_incendie.dart';
 import 'package:edualert/create_school.dart';
 import 'package:edualert/forgot_password.dart';
 import 'package:edualert/join_school.dart';
@@ -17,8 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => JoinSchool())));
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => AlertsAttentat())));
   }
 
   @override

@@ -44,9 +44,15 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'First Name And Surname', // Fixed label text
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                       hintText: 'Write First Name And Surname',
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 179, 179, 179),
+                        fontWeight: FontWeight.bold,
+                      ),
                       prefixIcon: Image.asset(
                         'assets/images/user.png',
                       ),
@@ -72,9 +78,15 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'E-Mail', // Fixed label text
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                       hintText: 'Write Your E-Mail',
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 179, 179, 179),
+                        fontWeight: FontWeight.bold,
+                      ),
                       prefixIcon: Image.asset(
                         'assets/images/email.png',
                       ),
@@ -100,9 +112,15 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Phone', // Fixed label text
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                       hintText: 'Write Your Number',
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 179, 179, 179),
+                        fontWeight: FontWeight.bold,
+                      ),
                       prefixIcon: Image.asset(
                         'assets/images/phone.png',
                       ),
@@ -128,9 +146,15 @@ class _SignUpState extends State<SignUp> {
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Password', // Fixed label text
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                       hintText: 'Write Your Password',
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(
+                        color: Color.fromARGB(255, 179, 179, 179),
+                        fontWeight: FontWeight.bold,
+                      ),
                       prefixIcon: Image.asset(
                         'assets/images/password.png',
                       ),
