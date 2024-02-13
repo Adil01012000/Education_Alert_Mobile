@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new, unnecessary_const
 
+import 'package:edualert/join_school.dart';
+import 'package:edualert/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -22,7 +24,7 @@ class _SignUpState extends State<SignUp> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -40,7 +42,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'First Name And Surname', // Fixed label text
@@ -74,7 +76,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'E-Mail', // Fixed label text
@@ -108,7 +110,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Phone', // Fixed label text
@@ -142,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Password', // Fixed label text
@@ -236,7 +238,10 @@ class _SignUpState extends State<SignUp> {
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => JoinSchool()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
@@ -274,7 +279,10 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => Login()));
+                              },
                               style: ButtonStyle(
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(

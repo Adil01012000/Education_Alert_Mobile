@@ -16,7 +16,7 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -67,7 +67,7 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
                             'assets/images/alerts_incendie_door.png',
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                             child: Text(
                               'Close Windows',
                               style: GoogleFonts.inter(
@@ -111,7 +111,7 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
                             'assets/images/alerts_incendie_evacuate.png',
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                             child: Text(
                               'Evacuated',
                               style: GoogleFonts.inter(
@@ -155,7 +155,7 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
                             'assets/images/alerts_incendie_never.png',
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                             child: Text(
                               'Never Go',
                               style: GoogleFonts.inter(
@@ -199,7 +199,7 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
                             'assets/images/alerts_incendie_join.png',
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                             child: Text(
                               'Join From',
                               style: GoogleFonts.inter(
@@ -243,7 +243,7 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
                             'assets/images/alerts_incendie_call.png',
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                             child: Text(
                               'Make The Call,',
                               style: GoogleFonts.inter(

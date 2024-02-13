@@ -22,7 +22,7 @@ class _JoinSchoolState extends State<JoinSchool> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -84,7 +84,7 @@ class _JoinSchoolState extends State<JoinSchool> {
                           ),
                         ),
                         child: Text(
-                          'Please Enter The Code Provided To You By Your \nEducational Institution To Join Their School.',
+                          'Please Enter The Code Provided To You \nBy Your Educational Institution To \nJoin Their School.',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                               color: Color.fromARGB(255, 179, 179, 179),

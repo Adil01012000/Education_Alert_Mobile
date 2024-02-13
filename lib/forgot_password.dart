@@ -81,7 +81,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                         ),
                         child: Text(
-                          'Please Enter Your E-Mail To Be Sent A Password \nReset Request.',
+                          'Please Enter Your E-Mail To Be Sent A \nPassword Reset Request.',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                               color: Color.fromARGB(255, 179, 179, 179),

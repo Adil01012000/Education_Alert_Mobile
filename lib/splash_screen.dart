@@ -28,12 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => ConferenceCall())));
+            MaterialPageRoute(builder: (context) => Login())));
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
+  Widget build(BuildContext context) {    return Container(
       color: Color(0xFF12283C),
       child: Image.asset(
         'assets/images/logo.png',

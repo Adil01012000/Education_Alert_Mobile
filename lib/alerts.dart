@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new
 
+import 'package:edualert/alerts_attentat.dart';
+import 'package:edualert/alerts_incendie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -47,7 +49,7 @@ class _AlertsState extends State<Alerts> {
                           ),
                         ),
                         child: Text(
-                          'Choose An Alert Type To Give Members Of Your \nSchool More Information.',
+                          'Choose An Alert Type To Give Members \nOf Your School More Information.',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
@@ -65,7 +67,10 @@ class _AlertsState extends State<Alerts> {
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => AlertsIncendie()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
@@ -88,7 +93,10 @@ class _AlertsState extends State<Alerts> {
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => AlertsAttentat()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),

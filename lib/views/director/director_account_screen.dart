@@ -17,13 +17,13 @@ class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF173B5C),
         leading: Image.asset('assets/images/logo.png'),
-        title: Center(child: Text('My Account')),
+        title: Center(child: Text('My Account', style: TextStyle(color: Colors.white),)),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(_createRoute());
               },
-              icon: Icon(Icons.menu))
+              icon: Icon(Icons.menu, color: Colors.white,))
         ],
       ),
       body: SingleChildScrollView(

@@ -2,6 +2,8 @@
 
 import 'package:edualert/forgot_password.dart';
 import 'package:edualert/sign_up.dart';
+import 'package:edualert/views/director/director_account_screen.dart';
+import 'package:edualert/views/director/main_director_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -139,7 +141,7 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Login()));
+                          MaterialPageRoute(builder: (context) => DirectorAccountScreen()));
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

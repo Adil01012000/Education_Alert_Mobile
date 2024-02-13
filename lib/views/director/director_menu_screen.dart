@@ -14,8 +14,8 @@ class DirectorMenuScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF173B5C),
         leading: Image.asset('assets/images/logo.png'),
-        title: Center(child: Text('Menu')),
-        actions: [Icon(Icons.menu)],
+        title: Center(child: Text('Menu',style: TextStyle(color: Colors.white),)),
+        actions: [Icon(Icons.menu,color: Colors.white,)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

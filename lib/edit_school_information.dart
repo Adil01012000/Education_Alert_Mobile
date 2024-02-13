@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new
 
+import 'package:edualert/views/director/director_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -33,7 +34,8 @@ class _EditSchoolInformationState extends State<EditSchoolInformation> {
             ),
           ),
         ),
-        actions: [Icon(Icons.menu)],
+        actions: [IconButton(onPressed: (){Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => DirectorMenuScreen()));}, icon: Icon(Icons.menu,color: Colors.white,))],
       ),
       body: Center(
         child: Column(
