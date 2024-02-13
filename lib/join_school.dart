@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new
 
+import 'package:edualert/create_school.dart';
+import 'package:edualert/views/director/director_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -100,7 +102,12 @@ class _JoinSchoolState extends State<JoinSchool> {
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DirectorAccountScreen()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
@@ -162,7 +169,12 @@ class _JoinSchoolState extends State<JoinSchool> {
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateSchool()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
