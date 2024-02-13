@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'package:edualert/alerts.dart';
-import 'package:edualert/alerts_attentat.dart';
-import 'package:edualert/alerts_incendie.dart';
-import 'package:edualert/conference_call.dart';
-import 'package:edualert/create_school.dart';
-import 'package:edualert/edit_director_information.dart';
-import 'package:edualert/edit_school_information.dart';
-import 'package:edualert/forgot_password.dart';
-import 'package:edualert/invite_staff.dart';
-import 'package:edualert/join_school.dart';
-import 'package:edualert/login.dart';
-import 'package:edualert/remove_staff.dart';
-import 'package:edualert/send_feedback.dart';
-import 'package:edualert/sign_up.dart';
+import 'package:edualert/views/generic/alerts.dart';
+import 'package:edualert/views/generic/alerts_attentat.dart';
+import 'package:edualert/views/generic/alerts_incendie.dart';
+import 'package:edualert/views/generic/conference_call.dart';
+import 'package:edualert/views/director/create_school.dart';
+import 'package:edualert/views/director/edit_director_information.dart';
+import 'package:edualert/views/director/edit_school_information.dart';
+import 'package:edualert/views/authentication/forgot_password.dart';
+import 'package:edualert/views/director/invite_staff.dart';
+import 'package:edualert/views/generic/join_school.dart';
+import 'package:edualert/views/authentication/login.dart';
+import 'package:edualert/views/director/remove_staff.dart';
+import 'package:edualert/views/generic/procedure_details.dart';
+import 'package:edualert/views/generic/send_feedback.dart';
+import 'package:edualert/views/authentication/sign_up.dart';
 import './views/director/main_director_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,11 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => Login())));
+            MaterialPageRoute(builder: (context) => ProcedureDetails())));
   }
 
   @override
-  Widget build(BuildContext context) {    return Container(
+  Widget build(BuildContext context) {
+    return Container(
       color: Color(0xFF12283C),
       child: Image.asset(
         'assets/images/logo.png',
