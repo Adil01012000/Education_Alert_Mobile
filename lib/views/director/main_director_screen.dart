@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import './director_menu_screen.dart';
 
 class MainDirectorScreen extends StatelessWidget {
   const MainDirectorScreen({super.key});
@@ -12,19 +13,19 @@ class MainDirectorScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF173B5C),
         leading: Image.asset('assets/images/logo.png'),
-        title: Text('mon établissement'),
-        actions: [Icon(Icons.menu)],
+        title: Center(child: Text('Mon établissement')),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(_createRoute());
+              },
+              icon: Icon(Icons.menu))
+        ],
       ),
       body: Center(
         child: Column(
           children: [
             Container(
-              // margin: EdgeInsets.zero,
-              // width: double.infinity, // Full width of the screen
-              // height: MediaQuery.of(context).size.height >= 183
-              //     ? 183
-              //     : MediaQuery.of(context).size.height,
-              // color: Color(0xFF12283c),
               child: Padding(
                 padding:
                     const EdgeInsets.only(left: 12.0, right: 12.0, top: 20),
@@ -356,4 +357,23 @@ class MainDirectorScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        const DirectorMenuScreen(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(1.0, 0.0); // Change from (0.0, 1.0) to (1.0, 0.0)
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }
