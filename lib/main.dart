@@ -1,4 +1,4 @@
-import 'package:edualert/splash_screen.dart';
+import './splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
