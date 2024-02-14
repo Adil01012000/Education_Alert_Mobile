@@ -17,6 +17,8 @@ import 'package:edualert/views/authentication/sign_up.dart';
 import './views/director/main_director_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'views/director/director_subscription_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -28,8 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => ProcedureDetails())));
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DirectorSubscriptionScreen())));
   }
 
   @override

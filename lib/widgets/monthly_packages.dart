@@ -1,149 +1,189 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_unnecessary_containers, prefer_const_constructors, sized_box_for_whitespace, unnecessary_string_interpolations, prefer_const_literals_to_create_immutables, avoid_print, deprecated_member_use
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-// import '../guest/hostel_screen.dart';
-// import '../guest/library_screen.dart';
-// import '../guest/transport_screen.dart';
+import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class PackagesData {
-  final String image;
-  final String categoryName;
+class MonthlyPackagesData {
+  final String users;
+  final String userDuration;
   final String routeNames;
 
-  PackagesData(this.image, this.categoryName, this.routeNames);
+  MonthlyPackagesData(this.users, this.userDuration, this.routeNames);
 }
 
-class PackagesCards extends StatelessWidget {
-  const PackagesCards({super.key});
+class MonthlyPackagesCards extends StatefulWidget {
+  const MonthlyPackagesCards({Key? key}) : super(key: key);
+
+  @override
+  State<MonthlyPackagesCards> createState() => _MonthlyPackagesCardsState();
+}
+
+class _MonthlyPackagesCardsState extends State<MonthlyPackagesCards> {
+  final CarouselController _controller = CarouselController();
+  int selectedCheckboxIndex =
+      -1; // Initialize with -1 to represent no selection
+  //    double screenHeight = MediaQuery.of(context).size.height;
+  // double height = screenHeight * 0.6;
+  final List<MonthlyPackagesData> data = [
+    MonthlyPackagesData('46 Users', 'First Month Offer', 'HostelScreen'),
+    MonthlyPackagesData('60 Users', 'First Month Paid', 'TransportScreen'),
+    MonthlyPackagesData('Unlimited', 'First Month Paid', 'LibraryScreen'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final CarouselController _controller = CarouselController();
-    double screenHeight = MediaQuery.of(context).size.height;
-    double height = screenHeight * 0.8;
-    final List<PackagesData> data = [
-      PackagesData('assets/images/hostel.png', 'Hostel', 'HostelScreen'),
-      PackagesData(
-          'assets/images/transport.png', 'Transport', 'TransportScreen'),
-      PackagesData('assets/images/library.png', 'Library', 'LibraryScreen'),
-    ];
-    Map<String, WidgetBuilder> routes = {
-      // 'HostelScreen': (context) => HostelScreen(),
-      // 'TransportScreen': (context) => TransportScreen(),
-      // 'LibraryScreen': (context) => LibraryScreen(),
-      // Add more routes as needed
-    };
-
     final List<Widget> imageSliders = [];
+    double screenHeight = MediaQuery.of(context).size.height;
+    double height = screenHeight * 0.7;
 
     for (int index = 0; index < data.length; index++) {
       imageSliders.add(
-        Container(
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              selectedCheckboxIndex = index;
+            });
+          },
           child: Container(
             margin: EdgeInsets.all(5.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+              borderRadius: BorderRadius.all(Radius.circular(16.0)),
               child: Stack(
                 children: <Widget>[
                   Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Image.asset(
-                      data[index].image,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 36.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 20.0,
-                          ),
-                          child: Text(
-                            data[index].categoryName,
-                            style: TextStyle(
-                              shadows: [
-                                Shadow(
-                                  color: Colors
-                                      .black, // Choose the color of the first shadow
-                                  blurRadius:
-                                      20.0, // Adjust the blur radius for the first shadow effect
-                                  offset: Offset(2.0,
-                                      2.0), // Set the horizontal and vertical offset for the first shadow
-                                ),
-                                Shadow(
-                                  color: Colors
-                                      .black, // Choose the color of the second shadow
-                                  blurRadius:
-                                      10.0, // Adjust the blur radius for the second shadow effect
-                                  offset: Offset(-2.0,
-                                      2.0), // Set the horizontal and vertical offset for the second shadow
-                                ),
-                              ],
-                              color: Colors.white,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Color(0xFF173B5C)),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Checkbox(
+                        value: selectedCheckboxIndex == index,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedCheckboxIndex = index;
+                          });
+                        },
+                        activeColor: Colors.white, // Hide default check mark
+                        checkColor: Color(0xFF173B5C),
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            // Set the uncheck color
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors
+                                  .white; // Use the desired color when unchecked
+                            }
+                            return Colors.white; // Use a transparent color
+                          },
+                        ) // Change check mark color
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Container(
-                            width: 80,
-                            height: 25,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 60.0),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                              'assets/images/carbon_skill-level-basic.png'),
+                          Text(
+                            'Subscription Plan',
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 30,
+                              ),
                             ),
-                            child: Builder(builder: (context) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         routes[data[index].routeNames](
-                                  //             context),
-                                  //   ),
-                                  // );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        25.0), // Use BorderRadius.circular
-                                  ),
-                                ),
-                                child: Row(
+                          ),
+                          Text(
+                            'Details',
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Gap(50),
+                          Image.asset('assets/images/60 €.png'),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, top: 40.0),
+                            child: Column(
+                              children: [
+                                Row(
                                   children: [
-                                    Text(
-                                      'More',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                    SizedBox(width: 7),
                                     Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.black,
-                                      size: 17,
+                                      Icons.check_circle,
+                                      color: Colors.white,
+                                    ),
+                                    Gap(5),
+                                    Text(
+                                      data[index].users,
+                                      style: GoogleFonts.inter(
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              );
-                            }),
+                                Gap(10),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.check_circle,
+                                      color: Colors.white,
+                                    ),
+                                    Gap(5),
+                                    Text(
+                                      data[index].userDuration,
+                                      style: GoogleFonts.inter(
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            bottom:
+                                20, // Adjust the value to set the button lower or higher
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(15, 15, 15, 5),
+                              width: MediaQuery.of(context).size.width,
+                              height: 80,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Color.fromARGB(255, 247, 56, 89),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Payer',
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -156,9 +196,19 @@ class PackagesCards extends StatelessWidget {
       items: imageSliders,
       options: CarouselOptions(
         enlargeCenterPage: true,
-        height: height,
+        height: height, // Adjust the height as needed
       ),
       carouselController: _controller,
     );
   }
+}
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        body: MonthlyPackagesCards(),
+      ),
+    ),
+  );
 }
