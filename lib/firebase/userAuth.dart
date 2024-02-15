@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../views/authentication/login.dart';
 import '../views/director/main_director_screen.dart';
+import '../views/generic/join_school.dart';
 
 class AuthenticationServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -21,8 +23,12 @@ class AuthenticationServices {
         fontSize: 16.0);
   }
 
-  Future<void> registerUser(String fullNameController, String emailController,
-      String phoneController, String passwordController) async {
+  Future<void> registerUser(
+      String fullNameController,
+      String emailController,
+      String phoneController,
+      String passwordController,
+      BuildContext context) async {
     try {
       if (emailController.isEmpty) {
         showMessage('Email cannot be empty.');
@@ -58,9 +64,11 @@ class AuthenticationServices {
             .doc(userCredential.user!.uid)
             .set(userData);
         showMessage('User sucessfully created');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => JoinSchool()));
       }
     } catch (e) {
-      showMessage('Error registering user: $e');
+      showMessage('Error registering user');
     }
   }
 
@@ -84,7 +92,7 @@ class AuthenticationServices {
         password: passwordController,
       );
 
-      showMessage("Login successful: ${userCredential.user?.email}");
+      showMessage("Login successfull");
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => MainDirectorScreen()));
     } on FirebaseAuthException catch (e) {
@@ -93,20 +101,22 @@ class AuthenticationServices {
       } else if (e.code == 'wrong-password') {
         showMessage('Wrong password provided.');
       } else {
-        showMessage("Login failed: ${e.message}");
+        showMessage("Log In failed due to wrong credentials");
       }
     } catch (e) {
       showMessage("An unexpected error occurred: $e");
     }
   }
 
-  Future<void> forgetUserPassword(String email) async {
+  Future<void> forgetUserPassword(String email, BuildContext context) async {
     try {
       if (email.isEmpty) {
-        showMessage('Password reset email sent successfully');
+        showMessage('Email cannot be empty.');
         return;
       } else {
         _auth.sendPasswordResetEmail(email: email);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Login()));
       }
     } catch (e) {
       showMessage('Error sending password reset email: $e');

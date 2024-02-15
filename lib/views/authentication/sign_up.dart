@@ -17,7 +17,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   @override
-  bool? isChecked = true;
+  bool isChecked = false;
   final AuthenticationServices authService = AuthenticationServices();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -226,21 +226,33 @@ class _SignUpState extends State<SignUp> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
+                      Checkbox(
+                        value: isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
+                        },
+                        activeColor: Color.fromARGB(
+                            255, 247, 56, 89), // Color when checked
+                        checkColor: Colors.white, // Color of the check mark
+                        fillColor: MaterialStateProperty.resolveWith<Color?>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.disabled)) {
+                              return Colors
+                                  .white; // Color when unchecked and disabled
+                            }
+                            return null; // Use the default color otherwise
+                          },
                         ),
-                        child: Text(
-                          'I agree with the terms and policy.',
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                            ),
+                      ),
+                      Text(
+                        'I agree with the terms and policy.',
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
                           ),
                         ),
                       ),
@@ -253,37 +265,12 @@ class _SignUpState extends State<SignUp> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (emailController.text.isEmpty) {
-                        authService.showMessage('Email cannot be empty.');
-                        return;
-                      } else if (passwordController.text.isEmpty) {
-                        authService.showMessage('Password cannot be empty.');
-                        return;
-                      } else if (phoneController.text.isEmpty) {
-                        authService
-                            .showMessage('Phone number cannot be empty.');
-                        return;
-                      } else if (fullNameController.text.isEmpty) {
-                        authService.showMessage('Full Name cannot be empty.');
-                        return;
-                      }
-                      if (!RegExp(
-                              r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
-                          .hasMatch(emailController.text)) {
-                        authService.showMessage("Invalid email format.");
-                        return;
-                      } else {
-                        authService.registerUser(
-                            fullNameController.text,
-                            emailController.text,
-                            phoneController.text,
-                            passwordController.text);
-
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => JoinSchool()));
-                      }
+                      authService.registerUser(
+                          fullNameController.text,
+                          emailController.text,
+                          phoneController.text,
+                          passwordController.text,
+                          context);
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

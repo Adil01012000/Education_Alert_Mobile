@@ -105,14 +105,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 80,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (emailController.text.isEmpty) {
-                        authService.showMessage('Email should not be empty');
-                        return;
-                      } else {
-                        authService.forgetUserPassword(emailController.text);
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Login()));
-                      }
+                      authService.forgetUserPassword(
+                          emailController.text, context);
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
