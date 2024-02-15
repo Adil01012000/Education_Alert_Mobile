@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../views/director/main_director_screen.dart';
+
 class AuthenticationServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -62,8 +64,8 @@ class AuthenticationServices {
     }
   }
 
-  Future<void> loginUser(
-      String emailController, String passwordController) async {
+  Future<void> loginUser(String emailController, String passwordController,
+      BuildContext context) async {
     try {
       if (emailController.isEmpty) {
         showMessage('Email cannot be empty.');
@@ -81,13 +83,10 @@ class AuthenticationServices {
         email: emailController,
         password: passwordController,
       );
-      if (userCredential.user?.emailVerified == false) {
-        showMessage(
-            "Email not verified. Please check your email for verification.");
 
-        return;
-      }
       showMessage("Login successful: ${userCredential.user?.email}");
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => MainDirectorScreen()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         showMessage('No user found for that email.');

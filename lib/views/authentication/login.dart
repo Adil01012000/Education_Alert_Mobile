@@ -164,12 +164,8 @@ class _LoginState extends State<Login> {
                         authService.showMessage("Invalid email format.");
                         return;
                       } else {
-                        authService.loginUser(
-                            emailController.text, passwordController.text);
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainDirectorScreen()));
+                        authService.loginUser(emailController.text,
+                            passwordController.text, context);
                       }
                     },
                     style: ButtonStyle(
