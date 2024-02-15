@@ -51,6 +51,7 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     controller: fullNameController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'First Name And Surname', // Fixed label text
                       labelStyle: TextStyle(
@@ -86,6 +87,7 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     controller: emailController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'E-Mail', // Fixed label text
                       labelStyle: TextStyle(
@@ -121,6 +123,7 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     controller: phoneController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Phone', // Fixed label text
                       labelStyle: TextStyle(
@@ -156,6 +159,7 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
                     controller: passwordController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Password', // Fixed label text
                       labelStyle: TextStyle(

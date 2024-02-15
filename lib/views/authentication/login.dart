@@ -51,6 +51,7 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
                     controller: emailController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(
@@ -83,6 +84,7 @@ class _LoginState extends State<Login> {
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
                     controller: passwordController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: TextStyle(

@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new
 
+import 'package:edualert/views/director/main_director_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../firebase/userAuth.dart';
 
 class CreateSchool extends StatefulWidget {
   const CreateSchool({super.key});
@@ -13,6 +16,11 @@ class CreateSchool extends StatefulWidget {
 }
 
 class _CreateSchoolState extends State<CreateSchool> {
+  final AuthenticationServices authService = AuthenticationServices();
+  TextEditingController schoolNameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +48,10 @@ class _CreateSchoolState extends State<CreateSchool> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 25, 15, 5),
                   child: TextField(
+                    controller: schoolNameController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      labelText: 'School Name', // Fixed label text
+                      labelText: 'School Name',
                       labelStyle: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                       hintText: 'Write Your School Name',
@@ -72,6 +82,8 @@ class _CreateSchoolState extends State<CreateSchool> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
+                    controller: addressController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Address', // Fixed label text
                       labelStyle: TextStyle(
@@ -104,6 +116,8 @@ class _CreateSchoolState extends State<CreateSchool> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
+                    controller: phoneController,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Phone Number', // Fixed label text
                       labelStyle: TextStyle(
@@ -138,7 +152,16 @@ class _CreateSchoolState extends State<CreateSchool> {
                   width: MediaQuery.of(context).size.width,
                   height: 110,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      print('abc');
+                      authService.createSchool(schoolNameController.text,
+                          addressController.text, phoneController.text);
+                      print('xyz');
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainDirectorScreen()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
