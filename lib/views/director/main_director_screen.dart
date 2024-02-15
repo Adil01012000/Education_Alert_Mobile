@@ -29,12 +29,12 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
         inactiveColor: Color.fromARGB(255, 230, 230, 230),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.domain),
               label: 'SCHOOLS',
               backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'ALERTS'),
+          BottomNavigationBarItem(icon: Icon(Icons.alarm_add), label: 'ALERTS'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'ALERTS NEWS'),
+              icon: Icon(Icons.campaign), label: 'ALERTS NEWS'),
         ],
         currentIndex: _selectedIndex,
         onTap: (index) {

@@ -56,15 +56,10 @@ class AuthenticationServices {
   Future<void> createSchool(String schoolNameController,
       String addressController, String phoneController) async {
     try {
-      // UserCredential userCredential =
-      //     await _auth.createUserWithEmailAndPassword(
-      //   email: emailController,
-      //   password: passwordController,
-      // );
       Map<String, dynamic> schoolData = {
         'school_name': schoolNameController,
         'adress': addressController,
-        'phone': phoneController
+        'phone': phoneController,
       };
       await _firestore.collection('schools').doc().set(schoolData);
       print('School created successfully!');
