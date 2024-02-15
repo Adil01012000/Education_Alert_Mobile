@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new, unnecessary_const
 
 import 'package:edualert/firebase/userAuth.dart';
+import 'package:edualert/views/authentication/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -78,9 +79,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextButton(
-                        onPressed: () {
-                          authService.forgetUserPassword(emailController.text);
-                        },
+                        onPressed: () {},
                         style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(
                             Colors.white,
@@ -106,9 +105,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 80,
                   child: ElevatedButton(
                     onPressed: () {
-                      print('abc');
-                      authService.forgetUserPassword(emailController.text);
-                      print('xyz');
+                      if (emailController.text.isEmpty) {
+                        authService.showMessage('Email should not be empty');
+                        return;
+                      } else {
+                        authService.forgetUserPassword(emailController.text);
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => Login()));
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

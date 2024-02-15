@@ -253,17 +253,37 @@ class _SignUpState extends State<SignUp> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      print('abc');
-                      authService.registerUser(
-                          fullNameController.text,
-                          emailController.text,
-                          phoneController.text,
-                          passwordController.text);
-                      print('xyz');
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => JoinSchool()));
+                      if (emailController.text.isEmpty) {
+                        authService.showMessage('Email cannot be empty.');
+                        return;
+                      } else if (passwordController.text.isEmpty) {
+                        authService.showMessage('Password cannot be empty.');
+                        return;
+                      } else if (phoneController.text.isEmpty) {
+                        authService
+                            .showMessage('Phone number cannot be empty.');
+                        return;
+                      } else if (fullNameController.text.isEmpty) {
+                        authService.showMessage('Full Name cannot be empty.');
+                        return;
+                      }
+                      if (!RegExp(
+                              r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+                          .hasMatch(emailController.text)) {
+                        authService.showMessage("Invalid email format.");
+                        return;
+                      } else {
+                        authService.registerUser(
+                            fullNameController.text,
+                            emailController.text,
+                            phoneController.text,
+                            passwordController.text);
+
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => JoinSchool()));
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

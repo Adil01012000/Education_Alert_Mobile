@@ -8,6 +8,7 @@ import 'package:edualert/views/director/main_director_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../firebase/userAuth.dart';
 
@@ -150,12 +151,26 @@ class _LoginState extends State<Login> {
                   height: 80,
                   child: ElevatedButton(
                     onPressed: () {
-                      authService.loginUser(
-                          emailController.text, passwordController.text);
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainDirectorScreen()));
+                      if (emailController.text.isEmpty) {
+                        authService.showMessage('Email cannot be empty.');
+                        return;
+                      } else if (passwordController.text.isEmpty) {
+                        authService.showMessage('Password cannot be empty.');
+                        return;
+                      }
+                      if (!RegExp(
+                              r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+                          .hasMatch(emailController.text)) {
+                        authService.showMessage("Invalid email format.");
+                        return;
+                      } else {
+                        authService.loginUser(
+                            emailController.text, passwordController.text);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainDirectorScreen()));
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
