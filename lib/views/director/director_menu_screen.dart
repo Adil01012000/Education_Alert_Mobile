@@ -1,3 +1,5 @@
+import 'package:edualert/views/director/director_subscription_screen.dart';
+import 'package:edualert/views/generic/send_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,8 +16,21 @@ class DirectorMenuScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF173B5C),
         leading: Image.asset('assets/images/logo.png'),
-        title: Center(child: Text('Menu',style: TextStyle(color: Colors.white),)),
-        actions: [Icon(Icons.menu,color: Colors.white,)],
+        title: Center(
+            child: Text(
+          'Menu',
+          style: TextStyle(color: Colors.white),
+        )),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -47,36 +62,55 @@ class DirectorMenuScreen extends StatelessWidget {
                 ),
               ),
               Gap(40),
-              Row(
-                children: [
-                  Image.asset('assets/images/Mask group.png'),
-                  Gap(15),
-                  Text(
-                    'Subscription plan',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            const DirectorSubscriptionScreen()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset('assets/images/Mask group.png'),
+                    Gap(15),
+                    Text(
+                      'Subscription plan',
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Gap(40),
-              Row(
-                children: [
-                  Image.asset('assets/images/gis_map-send.png'),
-                  Gap(15),
-                  Text(
-                    'Send Feedback',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SendFeedback()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset('assets/images/gis_map-send.png'),
+                    Gap(15),
+                    Text(
+                      'Send Feedback',
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Gap(40),
               Row(

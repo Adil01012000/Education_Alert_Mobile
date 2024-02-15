@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new, unnecessary_const
 
-import 'package:edualert/firebase/userAuth.dart';
 import 'package:edualert/views/authentication/forgot_password.dart';
 import 'package:edualert/views/authentication/sign_up.dart';
 import 'package:edualert/views/director/director_account_screen.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../firebase/userAuth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -19,10 +17,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final AuthenticationServices authService = AuthenticationServices();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +44,6 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
-                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(
@@ -82,7 +75,6 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
-                    controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: TextStyle(
@@ -148,12 +140,10 @@ class _LoginState extends State<Login> {
                   height: 80,
                   child: ElevatedButton(
                     onPressed: () {
-                      authService.loginUser(
-                          emailController.text, passwordController.text);
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DirectorAccountScreen()));
+                              builder: (context) => MainDirectorScreen()));
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

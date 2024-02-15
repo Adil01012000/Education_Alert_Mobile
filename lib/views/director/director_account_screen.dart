@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'director_menu_screen.dart';
+import '../../widgets/route_animations.dart';
 
 class DirectorAccountScreen extends StatefulWidget {
   const DirectorAccountScreen({super.key});
@@ -17,13 +19,20 @@ class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF173B5C),
         leading: Image.asset('assets/images/logo.png'),
-        title: Center(child: Text('My Account', style: TextStyle(color: Colors.white),)),
+        title: Center(
+            child: Text(
+          'My Account',
+          style: TextStyle(color: Colors.white),
+        )),
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).push(_createRoute());
+                Navigator.of(context).push(createRoute());
               },
-              icon: Icon(Icons.menu, color: Colors.white,))
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ))
         ],
       ),
       body: SingleChildScrollView(
@@ -216,23 +225,4 @@ class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
       ),
     );
   }
-}
-
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const DirectorMenuScreen(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0); // Change from (0.0, 1.0) to (1.0, 0.0)
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
 }

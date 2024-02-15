@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../widgets/route_animations.dart';
 
 class AlertsIncendie extends StatefulWidget {
   const AlertsIncendie({Key? key}) : super(key: key);
@@ -13,6 +17,33 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF12283C),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF173B5C),
+        leading: Image.asset('assets/images/logo.png'),
+        title: Center(
+          child: Text(
+            'Incendie',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 22,
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(createRoute());
+            },
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -269,29 +300,6 @@ class _AlertsIncendieState extends State<AlertsIncendie> {
                       ),
                     ),
                   ],
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
-                  width: MediaQuery.of(context).size.width,
-                  height: 90,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 247, 56, 89),
-                      ),
-                    ),
-                    child: Text(
-                      'Alert Details',
-                      style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),

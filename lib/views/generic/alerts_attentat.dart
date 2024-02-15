@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../widgets/route_animations.dart';
+
 class AlertsAttentat extends StatefulWidget {
   const AlertsAttentat({Key? key}) : super(key: key);
 
@@ -13,10 +15,37 @@ class _AlertsAttentatState extends State<AlertsAttentat> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF12283C),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF173B5C),
+        leading: Image.asset('assets/images/logo.png'),
+        title: Center(
+          child: Text(
+            'Attentat / Intrusion',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 22,
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(createRoute());
+            },
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -197,29 +226,6 @@ class _AlertsAttentatState extends State<AlertsAttentat> {
                       ),
                     ),
                   ],
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(15, 20, 15, 0),
-                  width: MediaQuery.of(context).size.width,
-                  height: 90,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 247, 56, 89),
-                      ),
-                    ),
-                    child: Text(
-                      'Alert Details',
-                      style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),

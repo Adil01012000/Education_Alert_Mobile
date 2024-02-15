@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new, unnecessary_const
 
-import 'package:edualert/firebase/userAuth.dart';
+import 'package:edualert/views/director/main_director_screen.dart';
+import 'package:edualert/views/generic/chat_screen.dart';
 import 'package:edualert/views/generic/join_school.dart';
 import 'package:edualert/views/authentication/login.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   bool? isChecked = true;
-  final AuthenticationServices authService = AuthenticationServices();
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +46,6 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
-                    controller: fullNameController,
                     decoration: InputDecoration(
                       labelText: 'First Name And Surname', // Fixed label text
                       labelStyle: TextStyle(
@@ -85,7 +80,6 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
-                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'E-Mail', // Fixed label text
                       labelStyle: TextStyle(
@@ -120,7 +114,6 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
-                    controller: phoneController,
                     decoration: InputDecoration(
                       labelText: 'Phone', // Fixed label text
                       labelStyle: TextStyle(
@@ -155,7 +148,6 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
-                    controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Password', // Fixed label text
                       labelStyle: TextStyle(
@@ -249,15 +241,10 @@ class _SignUpState extends State<SignUp> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      authService.registerUser(
-                          fullNameController.text,
-                          emailController.text,
-                          phoneController.text,
-                          passwordController.text);
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => JoinSchool()));
+                              builder: (context) => MainDirectorScreen()));
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

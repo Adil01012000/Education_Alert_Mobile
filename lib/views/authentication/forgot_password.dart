@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new, unnecessary_const
 
-import 'package:edualert/firebase/userAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -14,8 +13,6 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  final AuthenticationServices authService = AuthenticationServices();
-  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +40,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
-                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'E-Mail',
                       labelStyle: TextStyle(
@@ -78,9 +74,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       TextButton(
-                        onPressed: () {
-                          authService.forgetUserPassword(emailController.text);
-                        },
+                        onPressed: () {},
                         style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(
                             Colors.white,
@@ -105,9 +99,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: ElevatedButton(
-                    onPressed: () {
-                      authService.forgetUserPassword(emailController.text);
-                    },
+                    onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),

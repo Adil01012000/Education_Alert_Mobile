@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:edualert/views/generic/alerts_attentat.dart';
+import 'package:edualert/views/generic/alerts_incendie.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,7 +22,7 @@ class _ProcedureDetailsState extends State<ProcedureDetails> {
         leading: Image.asset('assets/images/logo.png'),
         title: Center(
             child: Text(
-          'My Account',
+          'Procedure Details',
           style: TextStyle(color: Colors.white),
         )),
         actions: [
@@ -44,7 +46,12 @@ class _ProcedureDetailsState extends State<ProcedureDetails> {
                   width: MediaQuery.of(context).size.width,
                   height: 90,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AlertsIncendie()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
@@ -67,7 +74,12 @@ class _ProcedureDetailsState extends State<ProcedureDetails> {
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AlertsAttentat()));
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
