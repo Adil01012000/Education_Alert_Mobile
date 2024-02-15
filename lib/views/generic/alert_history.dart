@@ -6,14 +6,16 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ConferenceCall extends StatefulWidget {
-  const ConferenceCall({super.key});
+import '../../widgets/route_animations.dart';
+
+class AlertsHistory extends StatefulWidget {
+  const AlertsHistory({super.key});
 
   @override
-  State<ConferenceCall> createState() => _ConferenceCallState();
+  State<AlertsHistory> createState() => _AlertsHistoryState();
 }
 
-class _ConferenceCallState extends State<ConferenceCall> {
+class _AlertsHistoryState extends State<AlertsHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,191 +35,217 @@ class _ConferenceCallState extends State<ConferenceCall> {
             ),
           ),
         ),
-        actions: [Icon(Icons.menu)],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(createRoute());
+              },
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: Center(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-              child: Text(
-                'Conference',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ),
             Gap(15),
             Expanded(
               child: ListView(
                 children: [
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'You',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 247, 56, 89),
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      trailing: Image.asset('assets/images/call_incoming.png'),
-                    ),
-                  ),
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'Julien Robert',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
+                      child: ListTile(
+                        leading: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Sender: ',
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'Tarik Abaza',
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Sender: ',
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'Tarik Abaza',
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
-                      trailing: Image.asset('assets/images/call_incoming.png'),
-                    ),
-                  ),
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'Julien Robert',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                      trailing: Text(
-                        'joining...',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Color.fromARGB(255, 179, 179, 179),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'Julien Robert',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                      trailing: Text(
-                        'joining...',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Color.fromARGB(255, 179, 179, 179),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
+                        trailing:
+                            Image.asset('assets/images/call_incoming.png'),
                       ),
                     ),
                   ),
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'Julien Robert',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 33, 62, 89),
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      trailing: Text(
-                        'joining...',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Color.fromARGB(255, 179, 179, 179),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                      child: ListTile(
+                        leading: Text(
+                          'You',
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
+                        trailing:
+                            Image.asset('assets/images/call_incoming.png'),
                       ),
                     ),
                   ),
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'Julien Robert',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 33, 62, 89),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListTile(
+                        leading: Text(
+                          'You',
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
+                        trailing:
+                            Image.asset('assets/images/call_incoming.png'),
                       ),
-                      trailing: Image.asset('assets/images/call_missed.png'),
                     ),
                   ),
-                  Card(
-                    color: Color.fromARGB(255, 33, 62, 89),
-                    child: ListTile(
-                      leading: Text(
-                        'Julien Robert',
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 33, 62, 89),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListTile(
+                        leading: Text(
+                          'You',
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
+                        trailing:
+                            Image.asset('assets/images/call_incoming.png'),
                       ),
-                      trailing: Image.asset('assets/images/call_missed.png'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 33, 62, 89),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListTile(
+                        leading: Text(
+                          'You',
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        trailing:
+                            Image.asset('assets/images/call_incoming.png'),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 120,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 33, 62, 89),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListTile(
+                        leading: Text(
+                          'You',
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        trailing:
+                            Image.asset('assets/images/call_incoming.png'),
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(15, 30, 15, 0),
-              width: MediaQuery.of(context).size.width,
-              height: 90,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 247, 56, 89),
-                  ),
-                ),
-                child: Text(
-                  'End Group Call',
-                  style: GoogleFonts.inter(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
               ),
             ),
           ],
