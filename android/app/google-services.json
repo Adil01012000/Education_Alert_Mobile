@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "569680484566",
+    "project_id": "education-alert-8f6e7",
+    "storage_bucket": "education-alert-8f6e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569680484566:android:033756377ac2958e465177",
+        "android_client_info": {
+          "package_name": "com.example.edualert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxWdMiKC9QobLNlxjayqEXufLbXrqN3fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

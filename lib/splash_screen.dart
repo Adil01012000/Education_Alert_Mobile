@@ -31,9 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DirectorSubscriptionScreen())));
+            context, MaterialPageRoute(builder: (context) => SignUp())));
   }
 
   @override
