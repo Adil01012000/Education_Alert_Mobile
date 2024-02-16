@@ -23,6 +23,8 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _obscureText = true;
+  bool isLoading = false;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,6 +160,7 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
                   child: TextField(
+                    obscureText: _obscureText,
                     controller: passwordController,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
@@ -182,10 +185,18 @@ class _SignUpState extends State<SignUp> {
                           width: 1.0,
                         ),
                       ),
-                      suffixIcon: Icon(
-                        Icons.remove_red_eye_rounded,
-                        color: Colors.white,
-                      ),
+                      suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                          child: Icon(
+                            _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.white,
+                          )),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
@@ -264,29 +275,45 @@ class _SignUpState extends State<SignUp> {
                   width: MediaQuery.of(context).size.width,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {
-                      authService.registerUser(
-                          fullNameController.text,
-                          emailController.text,
-                          phoneController.text,
-                          passwordController.text,
-                          context);
-                    },
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            authService
+                                .registerUser(
+                              fullNameController.text,
+                              emailController.text,
+                              phoneController.text,
+                              passwordController.text,
+                              context,
+                            )
+                                .then((_) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            });
+                          },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
                       ),
                     ),
-                    child: Text(
-                      'Register',
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
+                    child: isLoading
+                        ? CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white))
+                        : Text(
+                            'Register',
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
                   ),
                 ),
                 Padding(

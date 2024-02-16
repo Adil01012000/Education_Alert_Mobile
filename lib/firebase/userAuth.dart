@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -126,10 +128,15 @@ class AuthenticationServices {
   Future<void> createSchool(String schoolNameController,
       String addressController, String phoneController) async {
     try {
+      Random random = new Random();
+      int randomNumber = random.nextInt(1000000);
+      String schoolId = randomNumber.toString();
+
       Map<String, dynamic> schoolData = {
         'school_name': schoolNameController,
         'adress': addressController,
         'phone': phoneController,
+        'school_code': schoolId
       };
       await _firestore.collection('schools').doc().set(schoolData);
       print('School created successfully!');

@@ -285,7 +285,7 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  'Staff',
+                                  'Staf',
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
                                       color: Colors.white,

@@ -23,6 +23,8 @@ class _LoginState extends State<Login> {
   final AuthenticationServices authService = AuthenticationServices();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _obscureText = true;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +86,23 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                   child: TextField(
+                    obscureText: _obscureText,
                     controller: passwordController,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: 'Password',
+                      suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                          child: Icon(
+                            _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.white,
+                          )),
                       labelStyle: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                       hintText: 'Write Your Password',
@@ -150,39 +165,58 @@ class _LoginState extends State<Login> {
                   width: MediaQuery.of(context).size.width,
                   height: 80,
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (emailController.text.isEmpty) {
-                        authService.showMessage('Email cannot be empty.');
-                        return;
-                      } else if (passwordController.text.isEmpty) {
-                        authService.showMessage('Password cannot be empty.');
-                        return;
-                      }
-                      if (!RegExp(
-                              r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
-                          .hasMatch(emailController.text)) {
-                        authService.showMessage("Invalid email format.");
-                        return;
-                      } else {
-                        authService.loginUser(emailController.text,
-                            passwordController.text, context);
-                      }
-                    },
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            authService
+                                .loginUser(emailController.text,
+                                    passwordController.text, context)
+                                .then((_) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            });
+                          },
+                    // onPressed: () {
+                    //   if (emailController.text.isEmpty) {
+                    //     authService.showMessage('Email cannot be empty.');
+                    //     return;
+                    //   } else if (passwordController.text.isEmpty) {
+                    //     authService.showMessage('Password cannot be empty.');
+                    //     return;
+                    //   }
+                    //   if (!RegExp(
+                    //           r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+                    //       .hasMatch(emailController.text)) {
+                    //     authService.showMessage("Invalid email format.");
+                    //     return;
+                    //   } else {
+                    //     authService.loginUser(emailController.text,
+                    //         passwordController.text, context);
+                    //   }
+                    // },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 247, 56, 89),
                       ),
                     ),
-                    child: Text(
-                      'Login',
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
+                    child: isLoading
+                        ? CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white))
+                        : Text(
+                            'Login',
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
                   ),
                 ),
                 Padding(
