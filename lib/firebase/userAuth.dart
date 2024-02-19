@@ -13,6 +13,7 @@ import '../views/generic/join_school.dart';
 class AuthenticationServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  String? uid = '';
 
   void showMessage(msg) {
     Fluttertoast.cancel();
@@ -56,8 +57,10 @@ class AuthenticationServices {
           email: emailController,
           password: passwordController,
         );
+        User? user = userCredential.user;
+        uid = userCredential.user?.uid;
         Map<String, dynamic> userData = {
-          'uid': userCredential.user!.uid,
+          'uid': uid,
           'full_name': fullNameController,
           'email': emailController,
           'phone': phoneController,

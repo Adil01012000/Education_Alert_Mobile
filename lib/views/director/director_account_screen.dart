@@ -14,6 +14,7 @@ class DirectorAccountScreen extends StatefulWidget {
 
 class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
   DirectorServices directorServices = DirectorServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,7 +204,35 @@ class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: TextButton(
                     onPressed: () {
-                      directorServices.deleteAccount();
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                              'Are you sure you want to delete this account?'),
+                          content: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ElevatedButton(
+                                child: Text('Yes'),
+                                onPressed: () {
+                                  directorServices.deleteAccount(context);
+                                },
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              ElevatedButton(
+                                child: Text('No'),
+                                onPressed: () async {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
                     },
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(
