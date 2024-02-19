@@ -1,5 +1,9 @@
 // ignore_for_file: prefer_const_constructors, unused_import, avoid_unnecessary_containers
 
+import 'package:edualert/views/director/edit_director_information.dart';
+import 'package:edualert/views/director/edit_school_information.dart';
+import 'package:edualert/views/director/invite_staff.dart';
+import 'package:edualert/views/director/remove_staff.dart';
 import 'package:edualert/views/generic/alert_history.dart';
 import 'package:edualert/views/generic/alerts.dart';
 import 'package:flutter/cupertino.dart';
@@ -133,8 +137,17 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                                                     )
                                                   ],
                                                 ),
-                                                Image.asset(
-                                                    'assets/images/mingcute_edit-fill.png')
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EditSchoolInformation()));
+                                                  },
+                                                  child: Image.asset(
+                                                      'assets/images/mingcute_edit-fill.png'),
+                                                )
                                               ],
                                             ),
                                           ),
@@ -236,8 +249,17 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                                               children: [
                                                 Image.asset(
                                                     'assets/images/solar_user-id-bold.png'),
-                                                Image.asset(
-                                                    'assets/images/mingcute_edit-fill.png')
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EditDirectorInformation()));
+                                                  },
+                                                  child: Image.asset(
+                                                      'assets/images/mingcute_edit-fill.png'),
+                                                )
                                               ],
                                             ),
                                           ),
@@ -285,7 +307,7 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  'Staf',
+                                  'Staff',
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
                                       color: Colors.white,
@@ -330,8 +352,17 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                                                     ),
                                                   ),
                                                   Gap(10),
-                                                  Image.asset(
-                                                      'assets/images/Vector.png'),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  RemoveStaff()));
+                                                    },
+                                                    child: Image.asset(
+                                                        'assets/images/Vector.png'),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -390,7 +421,12 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                         width: MediaQuery.of(context).size.width,
                         height: 100,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InviteStaff()));
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                               Color.fromARGB(255, 247, 56, 89),
