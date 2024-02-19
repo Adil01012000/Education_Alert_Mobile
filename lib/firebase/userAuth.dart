@@ -57,6 +57,7 @@ class AuthenticationServices {
           password: passwordController,
         );
         Map<String, dynamic> userData = {
+          'uid': userCredential.user!.uid,
           'full_name': fullNameController,
           'email': emailController,
           'phone': phoneController,
