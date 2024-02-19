@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new
 
+import 'package:edualert/firebase/genericServices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -14,6 +15,9 @@ class SendFeedback extends StatefulWidget {
 }
 
 class _SendFeedbackState extends State<SendFeedback> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _feedbackController = TextEditingController();
+  GenericServices genericServices = GenericServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +46,7 @@ class _SendFeedbackState extends State<SendFeedback> {
               Padding(
                 padding: EdgeInsets.fromLTRB(15, 30, 15, 5),
                 child: TextField(
+                  controller: _nameController,
                   decoration: InputDecoration(
                     labelText: 'Name',
                     labelStyle: TextStyle(
@@ -71,6 +76,7 @@ class _SendFeedbackState extends State<SendFeedback> {
               Padding(
                 padding: EdgeInsets.fromLTRB(15, 20, 15, 5),
                 child: TextField(
+                  controller: _feedbackController,
                   maxLines: 15,
                   decoration: InputDecoration(
                     // labelText: 'Message',
@@ -104,7 +110,10 @@ class _SendFeedbackState extends State<SendFeedback> {
                 width: MediaQuery.of(context).size.width,
                 height: 90,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    genericServices.addFeedback(_nameController.text,
+                        _feedbackController.text, context);
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                       const Color.fromARGB(255, 247, 56, 89),
