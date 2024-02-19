@@ -1,13 +1,25 @@
+// ignore_for_file: unused_import, prefer_const_constructors
+
 import 'package:edualert/views/director/director_subscription_screen.dart';
 import 'package:edualert/views/generic/send_feedback.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../firebase/userAuth.dart';
 import 'director_account_screen.dart';
 
-class DirectorMenuScreen extends StatelessWidget {
+class DirectorMenuScreen extends StatefulWidget {
   const DirectorMenuScreen({super.key});
+
+  @override
+  State<DirectorMenuScreen> createState() => _DirectorMenuScreenState();
+}
+
+class _DirectorMenuScreenState extends State<DirectorMenuScreen> {
+  final AuthenticationServices authService = AuthenticationServices();
 
   @override
   Widget build(BuildContext context) {
@@ -162,20 +174,52 @@ class DirectorMenuScreen extends StatelessWidget {
                 ],
               ),
               Gap(40),
-              Row(
-                children: [
-                  Image.asset('assets/images/mdi_logout.png'),
-                  Gap(15),
-                  Text(
-                    'Log Out',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+              InkWell(
+                onTap: () async {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => AlertDialog(
+                      title: Text('Are you sure you want to exit?'),
+                      content: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ElevatedButton(
+                            child: Text('Yes'),
+                            onPressed: () {
+                              authService.logOut(context);
+                            },
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          ElevatedButton(
+                            child: Text('No'),
+                            onPressed: () async {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                  );
+                },
+                child: Row(
+                  children: [
+                    Image.asset('assets/images/mdi_logout.png'),
+                    Gap(15),
+                    Text(
+                      'Log Out',
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -139,7 +139,7 @@ class _MainDirectorScreenState extends State<MainDirectorScreen> {
                                                 ),
                                                 InkWell(
                                                   onTap: () {
-                                                    Navigator.pushReplacement(
+                                                    Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: (context) =>

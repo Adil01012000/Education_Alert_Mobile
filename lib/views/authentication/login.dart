@@ -178,6 +178,9 @@ class _LoginState extends State<Login> {
                               setState(() {
                                 isLoading = false;
                               });
+                              authService.saveUserDataToSharedPreferences(
+                                  emailController.text,
+                                  passwordController.text);
                             });
                           },
                     // onPressed: () {
