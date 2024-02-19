@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:edualert/firebase/directorServices.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/route_animations.dart';
@@ -12,6 +13,7 @@ class DirectorAccountScreen extends StatefulWidget {
 }
 
 class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
+  DirectorServices directorServices = DirectorServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,7 +202,9 @@ class _DirectorAccountScreenState extends State<DirectorAccountScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      directorServices.deleteAccount();
+                    },
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(
                         Colors.white,
