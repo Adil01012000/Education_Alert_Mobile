@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_import, implementation_imports, unused_import, unnecessary_new
 
+import 'package:edualert/views/authentication/login.dart';
 import 'package:edualert/views/director/main_director_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,7 +10,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../firebase/userAuth.dart';
 
 class CreateSchool extends StatefulWidget {
-  const CreateSchool({super.key});
+  final String fullName;
+  final String email;
+  final String phone;
+  final String password;
+
+  const CreateSchool({
+    Key? key,
+    required this.fullName,
+    required this.email,
+    required this.phone,
+    required this.password,
+  }) : super(key: key);
 
   @override
   State<CreateSchool> createState() => _CreateSchoolState();
@@ -153,14 +165,19 @@ class _CreateSchoolState extends State<CreateSchool> {
                   height: 110,
                   child: ElevatedButton(
                     onPressed: () {
-                      print('abc');
-                      authService.createSchool(schoolNameController.text,
-                          addressController.text, phoneController.text);
-                      print('xyz');
-                      Navigator.pushReplacement(
+                      authService.registerUser(
+                          widget.fullName,
+                          widget.email,
+                          widget.phone,
+                          widget.password,
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => MainDirectorScreen()));
+                          schoolNameController.text,
+                          addressController.text,
+                          phoneController.text);
+                      // authService.createSchool(schoolNameController.text,
+                      //     addressController.text, phoneController.text);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Login()));
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

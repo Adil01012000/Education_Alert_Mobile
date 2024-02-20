@@ -8,7 +8,18 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class JoinSchool extends StatefulWidget {
-  const JoinSchool({super.key});
+  final String fullName;
+  final String email;
+  final String phone;
+  final String password;
+
+  const JoinSchool({
+    Key? key,
+    required this.fullName,
+    required this.email,
+    required this.phone,
+    required this.password,
+  }) : super(key: key);
 
   @override
   State<JoinSchool> createState() => _JoinSchoolState();
@@ -171,9 +182,16 @@ class _JoinSchoolState extends State<JoinSchool> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CreateSchool()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateSchool(
+                            fullName: widget.fullName,
+                            email: widget.email,
+                            phone: widget.phone,
+                            password: widget.password,
+                          ),
+                        ),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

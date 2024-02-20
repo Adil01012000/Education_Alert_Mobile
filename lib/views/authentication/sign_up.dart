@@ -207,25 +207,17 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.white,
-                          ),
-                        ),
-                        child: Text(
-                          'Must be at least 6 characters',
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                            ),
+                      Text(
+                        'Must be at least 6 characters',
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
                           ),
                         ),
                       ),
@@ -244,16 +236,14 @@ class _SignUpState extends State<SignUp> {
                             isChecked = value!;
                           });
                         },
-                        activeColor: Color.fromARGB(
-                            255, 247, 56, 89), // Color when checked
-                        checkColor: Colors.white, // Color of the check mark
+                        activeColor: Color.fromARGB(255, 247, 56, 89),
+                        checkColor: Colors.white,
                         fillColor: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
                             if (states.contains(MaterialState.disabled)) {
-                              return Colors
-                                  .white; // Color when unchecked and disabled
+                              return Colors.white;
                             }
-                            return null; // Use the default color otherwise
+                            return !isChecked ? Colors.white : null;
                           },
                         ),
                       ),
@@ -281,19 +271,29 @@ class _SignUpState extends State<SignUp> {
                             setState(() {
                               isLoading = true;
                             });
-                            authService
-                                .registerUser(
-                              fullNameController.text,
-                              emailController.text,
-                              phoneController.text,
-                              passwordController.text,
-                              context,
-                            )
-                                .then((_) {
+                            if (!isChecked) {
+                              authService
+                                  .showMessage('Agree to the terms & policy');
                               setState(() {
                                 isLoading = false;
                               });
-                            });
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => JoinSchool(
+                                    fullName: fullNameController.text,
+                                    email: emailController.text,
+                                    phone: phoneController.text,
+                                    password: passwordController.text,
+                                  ),
+                                ),
+                              ).then((_) {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              });
+                            }
                           },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(

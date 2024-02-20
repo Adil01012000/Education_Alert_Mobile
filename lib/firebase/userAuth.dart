@@ -13,7 +13,7 @@ import '../views/generic/join_school.dart';
 class AuthenticationServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  String? uid = '';
+  String? uid;
 
   void showMessage(msg) {
     Fluttertoast.cancel();
@@ -28,54 +28,74 @@ class AuthenticationServices {
   }
 
   Future<void> registerUser(
-      String fullNameController,
-      String emailController,
-      String phoneController,
-      String passwordController,
-      BuildContext context) async {
+    String fullName,
+    String email,
+    String phone,
+    String password,
+    BuildContext context,
+    String schoolNameController,
+    String addressController,
+    String phoneController,
+  ) async {
     try {
-      if (emailController.isEmpty) {
-        showMessage('Email cannot be empty.');
-        return;
-      } else if (passwordController.isEmpty) {
-        showMessage('Password cannot be empty.');
-        return;
-      } else if (phoneController.isEmpty) {
-        showMessage('Phone number cannot be empty.');
-        return;
-      } else if (fullNameController.isEmpty) {
-        showMessage('Full Name cannot be empty.');
+      if (email.isEmpty ||
+          password.isEmpty ||
+          phone.isEmpty ||
+          fullName.isEmpty) {
+        showMessage('Please fill all the fields.');
         return;
       }
+
       if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
-          .hasMatch(emailController)) {
+          .hasMatch(email)) {
         showMessage("Invalid email format.");
         return;
-      } else {
-        UserCredential userCredential =
-            await _auth.createUserWithEmailAndPassword(
-          email: emailController,
-          password: passwordController,
-        );
-        User? user = userCredential.user;
-        uid = userCredential.user?.uid;
+      }
+
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      if (userCredential.user != null) {
+        uid = userCredential.user!.uid;
+
         Map<String, dynamic> userData = {
           'uid': uid,
-          'full_name': fullNameController,
-          'email': emailController,
-          'phone': phoneController,
-          'role': 'director'
+          'full_name': fullName,
+          'email': email,
+          'phone': phone,
+          'role': 'director',
         };
+
         await _firestore
             .collection('users')
             .doc(userCredential.user!.uid)
             .set(userData);
-        showMessage('User sucessfully created');
+        showMessage('User successfully created');
+
+        Random random = Random();
+        int randomNumber = random.nextInt(1000000);
+        String schoolId = randomNumber.toString();
+
+        Map<String, dynamic> schoolData = {
+          'director_id': uid,
+          'school_name': schoolNameController,
+          'adress': addressController,
+          'phone': phoneController,
+          'school_code': schoolId,
+        };
+
+        await _firestore.collection('schools').doc().set(schoolData);
+        print('School created successfully!');
+
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => JoinSchool()));
+            context, MaterialPageRoute(builder: (context) => Login()));
       }
     } catch (e) {
-      showMessage('Error registering user');
+      // print('Error Message: $e');
+      // showMessage('Error registering user $e');
     }
   }
 
@@ -130,25 +150,26 @@ class AuthenticationServices {
     }
   }
 
-  Future<void> createSchool(String schoolNameController,
-      String addressController, String phoneController) async {
-    try {
-      Random random = new Random();
-      int randomNumber = random.nextInt(1000000);
-      String schoolId = randomNumber.toString();
+  // Future<void> createSchool(String? uid, String schoolNameController,
+  //     String addressController, String phoneController) async {
+  //   try {
+  //     Random random = new Random();
+  //     int randomNumber = random.nextInt(1000000);
+  //     String schoolId = randomNumber.toString();
 
-      Map<String, dynamic> schoolData = {
-        'school_name': schoolNameController,
-        'adress': addressController,
-        'phone': phoneController,
-        'school_code': schoolId
-      };
-      await _firestore.collection('schools').doc().set(schoolData);
-      print('School created successfully!');
-    } catch (e) {
-      print('Error creating school: $e');
-    }
-  }
+  //     Map<String, dynamic> schoolData = {
+  //       'director_id': uid,
+  //       'school_name': schoolNameController,
+  //       'adress': addressController,
+  //       'phone': phoneController,
+  //       'school_code': schoolId
+  //     };
+  //     await _firestore.collection('schools').doc().set(schoolData);
+  //     print('School created successfully!');
+  //   } catch (e) {
+  //     print('Error creating school: $e');
+  //   }
+  // }
 
   Future<void> saveUserDataToSharedPreferences(
       String email, String password) async {
